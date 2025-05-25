@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // importações de modulos
 const DirectoryAnalizer = require('./modules/DirectoryAnalizer');
 const help = require('./modules/helpme');
