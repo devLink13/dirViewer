@@ -1,6 +1,6 @@
 {
   "name": "dir-viewer",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "main": "index.js",
   "bin": {
     "dir-viewer": "./index.js"
@@ -19,7 +19,7 @@
     "cli"
   ],
   "author": "Wesley Souza Link",
-  "license": "ISC",
+  "license": "MIT",
   "description": "Gerenciador CLI de estruturas de repositórios e arquivos."
 }
 
