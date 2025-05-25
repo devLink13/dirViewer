@@ -1,0 +1,26 @@
+{
+  "name": "dir-viewer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "dir-viewer": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devLink13/dirViewer.git"
+  },
+  "keywords": [
+    "diretório",
+    "estrutura",
+    "visualização",
+    "cli"
+  ],
+  "author": "Wesley Souza Link",
+  "license": "ISC",
+  "description": "Gerenciador CLI de estruturas de repositórios e arquivos."
+}
+
+
