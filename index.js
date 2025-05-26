@@ -24,18 +24,28 @@ else {
 
 
 const funcoes = {
-    print: (dirName) => {
+    print: async (dirName) => {
         console.log(`---------- LISTANDO O DIRETÓRIO --------------`);
         console.log(`Caminho do diretório: ${dirName}`);
-        DirectoryAnalizer.printTree(dirName);
+        await DirectoryAnalizer.printTree(dirName);
     },
 
-    generate: (dirName, outputFileName, outputPath) => {
+    generate: async (dirName, outputFileName, outputPath) => {
         console.log('--------- GERANDO ARQUIVO -------------');
-        DirectoryAnalizer.writeTree(dirName, outputFileName, outputPath);
+        await DirectoryAnalizer.writeTree(dirName, outputFileName, outputPath);
         console.log(`-> Sucesso ao gerar diretório.`);
         console.log(`-> Diretório analisado: ${dirName}`);
         console.log(`-> Diretório onde foi gerado o log: ${outputPath}, nome do arquivo: "${outputFileName}"`);
+    },
+
+    search: async (dirName, fileName) => {
+        console.log(`--------PROCURANDO ARQUIVO-----------`);
+        console.log(`-> Procurando "${fileName}" no diretório "${dirName}".`)
+        const result = await DirectoryAnalizer.searchTree(dirName, fileName);
+
+        if (result) console.log(`-> Arquivo encontrado com sucesso no diretório: "${result}"`);
+        else console.log('Arquivo não encontrado');
+
     }
 }
 
@@ -46,6 +56,9 @@ const comandos = {
 
     '--generate': funcoes.generate,
     '-g': funcoes.generate,
+
+    '--search': funcoes.search,
+    '-s': funcoes.search,
 
 }
 
@@ -58,13 +71,17 @@ else console.log('Erro: comando não reconhecido, veja os comandos usando: node 
 /**
  * comandos de teste:
  *  -> printar diretório
- *      node index.js --print "C:/Users/wslin/Desktop/Pasta de Teste"
- *      node index.js -p "C:/Users/wslin/Desktop/Pasta de Teste"
+ *      node index.js --list "C:/Users/wslin/Desktop/Pasta de Teste"
+ *      node index.js -l "C:/Users/wslin/Desktop/Pasta de Teste"
  *      node index.js "C:/Users/wslin/Desktop/Pasta de Teste"
  *  
  *  -> gerar txt com a estrutura do repositório
+ *      node index.js --generate "C:/Users/wslin/Desktop/Pasta de Teste"
  *      node index.js -g "C:/Users/wslin/Desktop/Pasta de Teste"
  * 
+ *  -> Procurar arquivo num diretório
+ *      node index.js --search "C:/Users/wslin/Desktop/Pasta de Teste" "teste.txt"
+ *      node index.js -s "C:/Users/wslin/Desktop/Pasta de Teste" "teste.txt"
  * 
  * C:/Users/wslin/Downloads 
  */

@@ -102,6 +102,38 @@ class DirectoryAnalizer {
         }
     }
 
+    // FUNCAO QUE PROCURA UM ARQUIVO NA ARVORE DO DIRETÓRIO
+    static async searchTree(dirName, fileName) {
+        const files = await this.#loadTree(dirName);
+        return await _walkAndSearchTree(files, dirName, fileName);
+
+        async function _walkAndSearchTree(files, dir, fileName, nivel = 0) {
+            for (let file of files) {
+                const filePath = path.resolve(dir, file);
+
+                // verificar se o arquivo procurado foi achado
+                if (file === fileName) return filePath;
+
+                // verificando se é uma pasta ou não
+                let stats;
+                try {
+                    stats = await fs.stat(filePath);
+                }
+                catch (error) {
+                    console.log(`erro ao gerar : ${filePath}`);
+                }
+
+                // recursão para subdiretórios
+                if (stats.isDirectory()) {
+                    const subFiles = await fs.readdir(filePath);
+                    const found = await _walkAndSearchTree(subFiles, filePath, fileName, nivel + 1);
+                    if (found) return found;
+                }
+            }
+            return null; // não encontrado
+        }
+    }
+
 }
 
 
